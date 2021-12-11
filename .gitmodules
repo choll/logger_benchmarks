@@ -10,3 +10,6 @@
 [submodule "third_party/reckless"]
 	path = third_party/reckless
 	url = git@github.com:mattiasflodin/reckless.git
+[submodule "third_party/spdlog"]
+	path = third_party/spdlog
+	url = git@github.com:gabime/spdlog.git

@@ -3,6 +3,7 @@
 #include "spdlog/async.h"
 #include "spdlog/sinks/basic_file_sink.h"
 #include "spdlog/spdlog.h"
+#include "spdlog/pattern_formatter.h"
 
 #include <string>
 
@@ -12,7 +13,6 @@ void spdlog_benchmark(std::vector<int32_t> thread_count_array, size_t num_iterat
   std::remove("spdlog_call_site_latency_percentile_linux_benchmark.log");
 
   // Setup
-  spdlog::set_automatic_registration(false);
 
   auto on_backend_start = []() {
     // Set the spdlog backend thread cpu affinity to zero
@@ -25,7 +25,7 @@ void spdlog_benchmark(std::vector<int32_t> thread_count_array, size_t num_iterat
     "spdlog_call_site_latency_percentile_linux_benchmark.log");
   auto logger = std::make_shared<spdlog::async_logger>("bench_logger", sink, spdlog::thread_pool(),
                                                        spdlog::async_overflow_policy::block);
-  logger->set_pattern("%T.%F [%t] %s:%# %l     %n - %v");
+  spdlog::set_pattern(*logger, "%T.%F [%t] %s:%# %l     %n - %v");
 
   // wait for the backend thread to start
   std::this_thread::sleep_for(std::chrono::seconds(1));

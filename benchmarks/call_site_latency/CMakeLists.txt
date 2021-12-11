@@ -34,6 +34,7 @@ target_include_directories(benchmark_reckless_call_site_latency PRIVATE ${CMAKE_
 add_executable(benchmark_spdlog_call_site_latency)
 target_sources(benchmark_spdlog_call_site_latency PRIVATE benchmark_spdlog_call_site_latency.cpp)
 target_link_libraries(benchmark_spdlog_call_site_latency PRIVATE Threads::Threads)
+target_include_directories(benchmark_spdlog_call_site_latency PRIVATE ${CMAKE_SOURCE_DIR}/third_party/spdlog/include)
 
 # g3log
 add_executable(benchmark_g3log_call_site_latency)
