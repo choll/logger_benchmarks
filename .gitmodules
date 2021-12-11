@@ -1,3 +1,6 @@
 [submodule "third_party/g3log"]
 	path = third_party/g3log
 	url = git@github.com:KjellKod/g3log.git
+[submodule "third_party/platformlab_nanolog/NanoLog"]
+	path = third_party/platformlab_nanolog/NanoLog
+	url = git@github.com:PlatformLab/NanoLog.git
