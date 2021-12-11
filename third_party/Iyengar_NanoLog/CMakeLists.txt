@@ -2,11 +2,11 @@
 set(TARGET_NAME IyengarNanoLog)
 
 # header files
-set(HEADER_FILES NanoLog.hpp
+set(HEADER_FILES NanoLog/NanoLog.hpp
         )
 
 # source files
-set(SOURCE_FILES NanoLog.cpp
+set(SOURCE_FILES NanoLog/NanoLog.cpp
         )
 
 # Add as a library

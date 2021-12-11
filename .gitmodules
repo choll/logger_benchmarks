@@ -13,3 +13,6 @@
 [submodule "third_party/spdlog"]
 	path = third_party/spdlog
 	url = git@github.com:gabime/spdlog.git
+[submodule "third_party/Iyengar_NanoLog/NanoLog"]
+	path = third_party/Iyengar_NanoLog/NanoLog
+	url = git@github.com:Iyengar111/NanoLog.git
