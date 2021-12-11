@@ -28,6 +28,7 @@ target_link_libraries(benchmark_iyengar_nanolog_call_site_latency PRIVATE Iyenga
 add_executable(benchmark_reckless_call_site_latency)
 target_sources(benchmark_reckless_call_site_latency PRIVATE benchmark_reckless_call_site_latency.cpp)
 target_link_libraries(benchmark_reckless_call_site_latency PRIVATE reckless Threads::Threads)
+target_include_directories(benchmark_reckless_call_site_latency PRIVATE ${CMAKE_SOURCE_DIR}/third_party/reckless/reckless/include)
 
 # spdlog
 add_executable(benchmark_spdlog_call_site_latency)

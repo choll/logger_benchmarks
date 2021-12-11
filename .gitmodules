@@ -7,3 +7,6 @@
 [submodule "third_party/binlog"]
 	path = third_party/binlog
 	url = git@github.com:morganstanley/binlog.git
+[submodule "third_party/reckless"]
+	path = third_party/reckless
+	url = git@github.com:mattiasflodin/reckless.git
