@@ -16,6 +16,8 @@ void reckless_benchmark(std::vector<int32_t> thread_count_array, size_t num_iter
   g_log.permanent_error_policy(reckless::error_policy::block);
   g_log.temporary_error_policy(reckless::error_policy::block);
 
+  set_pthread_affinity(g_log.worker_thread().native_handle(), 0);
+
   // wait for the backend thread to start
   std::this_thread::sleep_for(std::chrono::seconds(1));
 

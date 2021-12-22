@@ -8,6 +8,7 @@
 #include <array>
 #include <algorithm>
 
+#include <pthread.h>
 
 // perf c2c record -g --call-graph dwarf,8192  ./benchmark_quill_call_site_latency
 // perf c2c report -NN -g --call-graph -c pid,iaddr --stdio
@@ -16,10 +17,10 @@
 #define THREAD_LIST_COUNT                                                                          \
   std::vector<int32_t> { 1, 4 }
 #define ITERATIONS                                                                                 \
-  std::size_t { 100000 }
+  std::size_t { 10000 }
 
 #define MESSAGES                                                                                 \
-  std::size_t { 20 }
+  std::size_t { 200 }
 
 #define MIN_WAIT_DURATION                                                                          \
   std::chrono::microseconds { 1700 }
@@ -28,6 +29,15 @@
 
 #define BENCH_INT_INT_DOUBLE
 //#define BENCH_INT_INT_LARGESTR
+
+void set_pthread_affinity(pthread_t thread, int cpu)
+{
+    cpu_set_t cpus;
+    CPU_ZERO(&cpus);
+    CPU_SET(cpu, &cpus);
+    if (::pthread_setaffinity_np(thread, sizeof(cpus), &cpus) != 0)
+        abort();
+}
 
 /** -------- **/
 double rdtsc_ticks()
