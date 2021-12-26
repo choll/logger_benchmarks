@@ -45,3 +45,8 @@ target_link_libraries(benchmark_g3log_call_site_latency PRIVATE g3log)
 add_executable(benchmark_ms_binlog_call_site_latency)
 target_sources(benchmark_ms_binlog_call_site_latency PRIVATE benchmark_ms_binlog_call_site_latency.cpp)
 target_link_libraries(benchmark_ms_binlog_call_site_latency PRIVATE binlog Threads::Threads)
+
+# xtr
+add_executable(benchmark_xtr_call_site_latency)
+target_sources(benchmark_xtr_call_site_latency PRIVATE benchmark_xtr_call_site_latency.cpp)
+target_link_libraries(benchmark_xtr_call_site_latency PRIVATE xtr Threads::Threads)

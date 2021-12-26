@@ -10,3 +10,7 @@ runtime/testHelper/client.cc.i
 runtime/testHelper/client.cc.ii
 runtime/testHelper/client.map
 third_party/platformlab_nanolog/preprocessor/*.pyc
+build
+bench_results_*
+*.log
+*.swp

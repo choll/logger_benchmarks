@@ -16,3 +16,6 @@
 [submodule "third_party/Iyengar_NanoLog/NanoLog"]
 	path = third_party/Iyengar_NanoLog/NanoLog
 	url = git@github.com:Iyengar111/NanoLog.git
+[submodule "third_party/xtr"]
+	path = third_party/xtr
+	url = git@github.com:choll/xtr.git
