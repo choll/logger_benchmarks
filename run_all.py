@@ -25,3 +25,6 @@ for benchname in benchmarks:
 
     print("Running {}".format(bench))
     subprocess.call(bench, stdout=output)
+
+
+    # USE TABULATE WITH tablefmt=github
