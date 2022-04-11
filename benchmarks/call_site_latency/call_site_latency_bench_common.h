@@ -17,10 +17,10 @@
 #define THREAD_LIST_COUNT                                                                          \
   std::vector<int32_t> { 1, 4 }
 #define ITERATIONS                                                                                 \
-  std::size_t { 10000 }
+  std::size_t { 20000 }
 
 #define MESSAGES                                                                                 \
-  std::size_t { 200 }
+  std::size_t { 1000 }
 
 #define MIN_WAIT_DURATION                                                                          \
   std::chrono::microseconds { 1700 }
