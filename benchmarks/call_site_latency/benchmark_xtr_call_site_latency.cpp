@@ -16,20 +16,10 @@ void xtr_benchmark(std::vector<int32_t> thread_count_array, size_t num_iteration
   // wait for the backend thread to start
   std::this_thread::sleep_for(std::chrono::seconds(1));
 
-  // TODO, add function to setup tsc:
-  // xtr::initialize_tsc();
-  auto s = log.get_sink("main");
-  XTR_LOG_TSC(s, "");
-  s.sync();
-
   // Define a logging lambda
 #ifdef BENCH_INT_INT_DOUBLE
   auto log_func = [&log](uint64_t i, uint64_t j, double d) mutable {
     thread_local auto sink = log.get_sink("main");
-    //XTR_LOG(sink, "Logging int: {}, int: {}, double: {}", i, j, d);
-    //XTR_TRY_LOG_TSC(sink, "Logging int: {}, int: {}, double: {}", i, j, d);
-    //XTR_TRY_LOGL(info, sink, "Logging int: {}, int: {}, double: {}", i, j, d);
-    //XTR_TRY_LOGL_TSC(info, sink, "Logging int: {}, int: {}, double: {}", i, j, d);
     XTR_LOGL_TSC(info, sink, "Logging int: {}, int: {}, double: {}", i, j, d);
   };
 #elif defined(BENCH_INT_INT_LARGESTR)
