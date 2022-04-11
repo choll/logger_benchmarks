@@ -25,7 +25,7 @@ void spdlog_benchmark(std::vector<int32_t> thread_count_array, size_t num_iterat
     "spdlog_call_site_latency_percentile_linux_benchmark.log");
   auto logger = std::make_shared<spdlog::async_logger>("bench_logger", sink, spdlog::thread_pool(),
                                                        spdlog::async_overflow_policy::block);
-  spdlog::set_pattern(*logger, "%T.%F [%t] %s:%# %l     %n - %v");
+  spdlog::set_pattern("%T.%F [%t] %s:%# %l     %n - %v");
 
   // wait for the backend thread to start
   std::this_thread::sleep_for(std::chrono::seconds(1));
