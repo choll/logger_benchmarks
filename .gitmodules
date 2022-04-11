@@ -5,7 +5,7 @@
 	path = third_party/platformlab_nanolog/NanoLog
 	url = git@github.com:PlatformLab/NanoLog.git
 [submodule "third_party/binlog"]
-	path = third_party/binlog
+	path = third_party/ms_binlog
 	url = git@github.com:morganstanley/binlog.git
 [submodule "third_party/reckless"]
 	path = third_party/reckless
@@ -14,8 +14,11 @@
 	path = third_party/spdlog
 	url = git@github.com:gabime/spdlog.git
 [submodule "third_party/Iyengar_NanoLog/NanoLog"]
-	path = third_party/Iyengar_NanoLog/NanoLog
+	path = third_party/iyengar_nanolog/NanoLog
 	url = git@github.com:Iyengar111/NanoLog.git
 [submodule "third_party/xtr"]
 	path = third_party/xtr
 	url = git@github.com:choll/xtr.git
+[submodule "third_party/quill"]
+	path = third_party/quill
+	url = git@github.com:odygrd/quill.git
