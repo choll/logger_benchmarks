@@ -209,14 +209,31 @@ inline void run_benchmark(char const* benchmark_name,
   // Sort all latencies
   std::sort(latencies_combined.begin(), latencies_combined.end());
 
-  std::cout << "Thread Count " << thread_count << " - Total messages " << latencies_combined.size()
-            << " - " << benchmark_name << "\n |  50th | 75th | 90th | 95th | 99th | 99.9th | Worst |\n"
-            << " |  " << latencies_combined[(size_t)(num_iterations * thread_count) * 0.5]
-            << "  |  " << latencies_combined[(size_t)(num_iterations * thread_count) * 0.75]
-            << "  |  " << latencies_combined[(size_t)(num_iterations * thread_count) * 0.9]
-            << "  |  " << latencies_combined[(size_t)(num_iterations * thread_count) * 0.95]
-            << "  |  " << latencies_combined[(size_t)(num_iterations * thread_count) * 0.99]
-            << "  |  " << latencies_combined[(size_t)(num_iterations * thread_count) * 0.999]
-            << "  |  " << latencies_combined[latencies_combined.size() - 1] << "  |\n\n";
+  const bool first = thread_count == THREAD_LIST_COUNT.front();
+  const bool last = thread_count == THREAD_LIST_COUNT.back();
+
+  if (first)
+    std::cout << "[";
+
+  std::cout
+    << "{\n"
+    << "  \"thread_count\": " << thread_count << ",\n"
+    << "  \"total_messages\": " << latencies_combined.size() << ",\n"
+    << "  \"centiles\": ["
+        << latencies_combined[(size_t)(num_iterations * thread_count) * 0.5]
+        << ", " << latencies_combined[(size_t)(num_iterations * thread_count) * 0.75]
+        << ", " << latencies_combined[(size_t)(num_iterations * thread_count) * 0.9]
+        << ", " << latencies_combined[(size_t)(num_iterations * thread_count) * 0.95]
+        << ", " << latencies_combined[(size_t)(num_iterations * thread_count) * 0.99]
+        << ", " << latencies_combined[(size_t)(num_iterations * thread_count) * 0.999]
+        << ", " << latencies_combined[latencies_combined.size() - 1]
+        << "]\n"
+    << "}";
+
+  if (last)
+    std::cout << "]\n";
+  else
+    std::cout << ",\n";
+
 #endif
 }

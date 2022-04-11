@@ -1,30 +1,40 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 
+import json
 import subprocess
+from tabulate import tabulate
 
-root_dir = "build/benchmarks/call_site_latency/"
+root_dir = "build/benchmarks/call_site_latency"
+loggers = ["g3log", "iyengar_nanolog", "ms_binlog", "platformlab_nanolog", "quill", "reckless", "spdlog", "xtr"]
 
-benchmark_quill_no_dual_mode_unbounded = "benchmark_quill_no_dual_mode_unbounded_call_site_latency"
-benchmark_quill_dual_mode_unbounded = "benchmark_quill_dual_mode_unbounded_call_site_latency"
-benchmark_quill_dual_mode_bounded = "benchmark_quill_dual_mode_bounded_call_site_latency"
-benchmark_g3log = "benchmark_g3log_call_site_latency"
-benchmark_iyengar_nanolog = "benchmark_iyengar_nanolog_call_site_latency"
-benchmark_ms_binlog = "benchmark_ms_binlog_call_site_latency"
-benchmark_platformlab = "benchmark_platformlab_call_site_latency"
-benchmark_reckless = "benchmark_reckless_call_site_latency"
-benchmark_spdlog = "benchmark_spdlog_call_site_latency"
-benchmark_xtr = "benchmark_xtr_call_site_latency"
+results_map = {}
+versions = {}
 
-benchmarks = [benchmark_quill_no_dual_mode_unbounded, benchmark_quill_dual_mode_unbounded, benchmark_quill_dual_mode_bounded, benchmark_platformlab, benchmark_ms_binlog, benchmark_spdlog, benchmark_g3log, benchmark_iyengar_nanolog, benchmark_reckless, benchmark_xtr]
+for name in loggers:
+    try:
+        version = subprocess.check_output(["git", "describe", "--tags"], cwd="third_party/{}".format(name), stderr=subprocess.DEVNULL)
+    except:
+        version = subprocess.check_output(["git", "rev-parse", "--short", "HEAD"], cwd="third_party/{}".format(name))
+    versions[name] = version
 
-for benchname in benchmarks:
-    s = "bench_results_{}.txt".format(benchname)
-    bench = root_dir + benchname
-    print("Writing to {} for {}".format(s, bench))
-    output = open(s, "w")
+for name in loggers:
+    bench = "{}/benchmark_{}_call_site_latency".format(root_dir,name)
 
-    print("Running {}".format(bench))
-    subprocess.call(bench, stdout=output)
+    print("Running {}".format(name))
 
+    results = json.loads(subprocess.check_output(bench))
 
-    # USE TABULATE WITH tablefmt=github
+    for result in results:
+        if not result["thread_count"] in results_map:
+            results_map[result["thread_count"]] = {}
+        results_map[result["thread_count"]][name] = result
+
+for thread_count in results_map:
+    table = []
+
+    for name in results_map[thread_count]:
+        table += [[name] + results_map[thread_count][name]["centiles"] + [versions[name]]]
+
+    table.sort(key=lambda row: (row[1], row[2], row[3])) # Sort by median
+
+    print(tabulate(table, headers=["Library", "50", "75", "90", "95", "99", "99.9", "Max", "Version"], tablefmt="github"))
