@@ -28,14 +28,12 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -march=native")
 #---------------------------------------------------------------------------------------
 # Subdirectories
 #-------------------------------------------------------------------------------------------------------
-add_subdirectory(quill_dual_mode_bounded)
-add_subdirectory(quill_dual_mode_unbounded)
-add_subdirectory(quill_no_dual_mode_unbounded)
-add_subdirectory(third_party/Iyengar_NanoLog)
+add_subdirectory(third_party/quill)
+add_subdirectory(third_party/iyengar_nanolog)
 add_subdirectory(third_party/reckless)
 add_subdirectory(third_party/platformlab_nanolog)
 add_subdirectory(third_party/g3log)
-add_subdirectory(third_party/binlog)
+add_subdirectory(third_party/ms_binlog)
 add_subdirectory(third_party/xtr)
 
 add_subdirectory(benchmarks)
