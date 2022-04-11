@@ -12,7 +12,7 @@ void reckless_benchmark(std::vector<int32_t> thread_count_array, size_t num_iter
 
   using log_t = reckless::severity_log<reckless::indent<4>, ' ', reckless::severity_field, reckless::timestamp_field>;
   reckless::file_writer writer("reckless_call_site_latency_percentile_linux_benchmark.log");
-  log_t g_log(&writer);
+  log_t g_log(&writer, 256UL * 1024UL, 0);
   g_log.permanent_error_policy(reckless::error_policy::block);
   g_log.temporary_error_policy(reckless::error_policy::block);
 
