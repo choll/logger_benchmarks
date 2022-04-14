@@ -40,15 +40,15 @@ calculated.
 * SMT disabled
 * cpupower governor set to 'performance'
 * Kernel command line parameters:
-** `noibrs`
-** `noibpb`
-** `no_stf_barrier`
-** `mitigations=off`
-** `transparent_hugepage=never`
-** `isolcpus=0,1,2,3,4`
-** `nohz_full=0,1,2,3,4`
-** `rcu_nocbs=0,1,2,3,4`
-** `rcu_nocb_poll`
+    - `noibrs`
+    - `noibpb`
+    - `no_stf_barrier`
+    - `mitigations=off`
+    - `transparent_hugepage=never`
+    - `isolcpus=0,1,2,3,4`
+    - `nohz_full=0,1,2,3,4`
+    - `rcu_nocbs=0,1,2,3,4`
+    - `rcu_nocb_poll`
 
 ## Notes
 
