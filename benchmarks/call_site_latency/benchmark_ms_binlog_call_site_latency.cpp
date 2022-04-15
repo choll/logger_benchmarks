@@ -10,13 +10,11 @@
 /***/
 void binlog_benchmark(std::vector<int32_t> thread_count_array, size_t num_iterations_per_thread)
 {
-  std::remove("binlog_call_site_latency_percentile_linux_benchmark.blog");
-
   // Start a binlog backend logging threads to consume the logs
   std::atomic<bool> done{false};
 
   std::thread backend([&done]() {
-    std::ofstream logfile("binlog_call_site_latency_percentile_linux_benchmark.blog", std::ofstream::out | std::ofstream::binary);
+    std::ofstream logfile("ms_binlog.blog", std::ofstream::out | std::ofstream::binary);
 
     // pin to cpu
     set_thread_affinity(0);

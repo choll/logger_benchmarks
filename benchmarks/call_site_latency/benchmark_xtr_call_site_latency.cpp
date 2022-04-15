@@ -7,9 +7,7 @@
 /***/
 void xtr_benchmark(std::vector<int32_t> thread_count_array, size_t num_iterations_per_thread)
 {
-  std::remove("benchmark_xtr_call_site_latency_percentile_linux_benchmark.log");
-
-  xtr::logger log("benchmark_xtr_call_site_latency_percentile_linux_benchmark.log");
+  xtr::logger log("xtr.log");
 
   set_pthread_affinity(log.consumer_thread_native_handle(), 0);
 

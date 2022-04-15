@@ -10,8 +10,6 @@
 /***/
 void spdlog_benchmark(std::vector<int32_t> thread_count_array, size_t num_iterations_per_thread)
 {
-  std::remove("spdlog_call_site_latency_percentile_linux_benchmark.log");
-
   // Setup
 
   auto on_backend_start = []() {
@@ -21,8 +19,7 @@ void spdlog_benchmark(std::vector<int32_t> thread_count_array, size_t num_iterat
 
   spdlog::init_thread_pool(8388608, 1, on_backend_start);
 
-  auto sink = std::make_shared<spdlog::sinks::basic_file_sink_st>(
-    "spdlog_call_site_latency_percentile_linux_benchmark.log");
+  auto sink = std::make_shared<spdlog::sinks::basic_file_sink_st>("spdlog.log");
   auto logger = std::make_shared<spdlog::async_logger>("bench_logger", sink, spdlog::thread_pool(),
                                                        spdlog::async_overflow_policy::block);
   spdlog::set_pattern("%T.%F [%t] %s:%# %l     %n - %v");

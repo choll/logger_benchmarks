@@ -7,11 +7,8 @@
 /***/
 void iyengar_nanoLog_benchmark(std::vector<int32_t> thread_count_array, size_t num_iterations_per_thread)
 {
-  std::remove("iyengar_nanoLog_call_site_latency_percentile_linux_benchmark.log");
-
   // Guaranteed nano log.
-  nanolog::initialize(nanolog::GuaranteedLogger(), "./",
-                      "iyengar_nanoLog_call_site_latency_percentile_linux_benchmark.log", 10 * 1024 /* 10GB */);
+  nanolog::initialize(nanolog::GuaranteedLogger(), "./", "iyengar_nanoLog.log", 10 * 1024 /* 10GB */);
 
   std::this_thread::sleep_for(std::chrono::seconds(1));
 

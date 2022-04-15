@@ -8,8 +8,6 @@
 /***/
 void g3log_benchmark(std::vector<int32_t> thread_count_array, size_t num_iterations_per_thread)
 {
-  std::remove("g3log_call_site_latency_percentile_linux_benchmark.log");
-
   auto worker = g3::LogWorker::createLogWorker();
   auto handle = worker->addDefaultLogger("g2log_logger", "./");
   g3::initializeLogging(worker.get());

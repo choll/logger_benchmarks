@@ -5,8 +5,6 @@
 
 void quill_benchmark(std::vector<int32_t> thread_count_array, size_t num_iterations_per_thread)
 {
-  std::remove("benchmark_quill_call_site_latency.log");
-
   // Setup
   quill::config::set_backend_thread_sleep_duration(std::chrono::nanoseconds{0});
   quill::config::set_backend_thread_cpu_affinity(0);
@@ -18,8 +16,7 @@ void quill_benchmark(std::vector<int32_t> thread_count_array, size_t num_iterati
   std::this_thread::sleep_for(std::chrono::seconds(1));
 
   // Create a file handler to write to a file
-  quill::Handler* file_handler =
-    quill::file_handler("benchmark_quill_call_site_latency.log", "w");
+  quill::Handler* file_handler = quill::file_handler("quill.log", "w");
 
   quill::Logger* logger = quill::create_logger("bench_logger", file_handler);
 

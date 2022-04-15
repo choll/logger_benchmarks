@@ -7,9 +7,7 @@
 /***/
 void platformlab_nanolog(std::vector<int32_t> thread_count_array, size_t num_iterations_per_thread)
 {
-  std::remove("platformlab_nanolog_call_site_latency_percentile_linux_benchmark.log");
-
-  NanoLog::setLogFile("platformlab_nanolog_call_site_latency_percentile_linux_benchmark.log");
+  NanoLog::setLogFile("platformlab_nanolog.log");
 
   // wait for the backend thread to start
   std::this_thread::sleep_for(std::chrono::seconds(1));
