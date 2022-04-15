@@ -77,7 +77,7 @@ calculated.
     - `rcu_nocbs=0,1,2,3,4`
     - `rcu_nocb_poll`
 
-## Notes
+## Changes From Upstream
 
 * The Reckless buffer size was increased to 256KB (default is 64KB).
 * Affinity settings were applied to the Reckless worker thread.
@@ -86,6 +86,9 @@ calculated.
   stable readings for all loggers. The default of 20 is possibly too low,
   resulting in frequency-scaling not occurring. PlatformLab, Reckless and XTR
   all had unexpectedly high timings with only 20 messages.
+
+# Notes
+
 * PlatformLab runs either at 7-8ns or ~30ns, possibly the number of messages
   needs to be increased further.
 
