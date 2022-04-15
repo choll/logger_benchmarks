@@ -14,18 +14,12 @@
 // perf c2c report -NN -g --call-graph -c pid,iaddr --stdio
 #define BENCH_WITHOUT_PERF
 
-#define THREAD_LIST_COUNT                                                                          \
-  std::vector<int32_t> { 1, 4 }
-#define ITERATIONS                                                                                 \
-  std::size_t { 20000 }
+#define THREAD_LIST_COUNT   std::vector<int32_t> { 1, 4 }
+#define ITERATIONS          std::size_t { 20000 }
+#define MESSAGES            std::size_t { 1000 }
 
-#define MESSAGES                                                                                 \
-  std::size_t { 1000 }
-
-#define MIN_WAIT_DURATION                                                                          \
-  std::chrono::microseconds { 1700 }
-#define MAX_WAIT_DURATION                                                                          \
-  std::chrono::microseconds { 4000 }
+#define MIN_WAIT_DURATION   std::chrono::microseconds { 1700 }
+#define MAX_WAIT_DURATION   std::chrono::microseconds { 4000 }
 
 #define BENCH_INT_INT_DOUBLE
 //#define BENCH_INT_INT_LARGESTR
