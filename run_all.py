@@ -1,10 +1,13 @@
 #!/usr/bin/python3
 
+import os
 import json
 import subprocess
 from tabulate import tabulate
+import tempfile
 
-root_dir = "build/benchmarks/call_site_latency"
+script_dir = os.path.dirname(__file__)
+bin_dir = "{}/build/benchmarks/call_site_latency".format(script_dir)
 loggers = ["g3log", "iyengar_nanolog", "ms_binlog", "platformlab_nanolog", "quill", "reckless", "spdlog", "xtr"]
 
 results_map = {}
@@ -12,17 +15,17 @@ versions = {}
 
 for name in loggers:
     try:
-        version = subprocess.check_output(["git", "describe", "--tags"], cwd="third_party/{}".format(name), stderr=subprocess.DEVNULL)
+        version = subprocess.check_output(["git", "describe", "--tags"], cwd="{}/third_party/{}".format(script_dir, name), stderr=subprocess.DEVNULL)
     except:
-        version = subprocess.check_output(["git", "rev-parse", "--short", "HEAD"], cwd="third_party/{}".format(name))
+        version = subprocess.check_output(["git", "rev-parse", "--short", "@:third_party/{}".format(name)], cwd=script_dir)
     versions[name] = version
 
 for name in loggers:
-    bench = "{}/benchmark_{}_call_site_latency".format(root_dir,name)
+    bench = "{}/benchmark_{}_call_site_latency".format(bin_dir, name)
 
-    print("Running {}".format(name))
-
-    results = json.loads(subprocess.check_output(bench))
+    with tempfile.TemporaryDirectory(prefix="benchmark_{}_".format(name), dir=os.getcwd()) as tmpdir:
+        print("Running {}, logging to {}".format(name, tmpdir))
+        results = json.loads(subprocess.check_output(bench, cwd=tmpdir))
 
     for result in results:
         if not result["thread_count"] in results_map:
