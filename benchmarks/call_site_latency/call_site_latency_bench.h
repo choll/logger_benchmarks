@@ -10,6 +10,8 @@
 #include <random>
 #include <thread>
 
+#include <sched.h>
+
 // Instead of sleep
 inline void wait(std::chrono::nanoseconds min, std::chrono::nanoseconds max)
 {
@@ -69,6 +71,13 @@ inline void run_log_benchmark(size_t num_iterations,
 {
   // running thread affinity
   set_thread_affinity(current_thread_num);
+
+  sched_param param{};
+
+  param.sched_priority = 99;
+
+  if (sched_setscheduler(0, SCHED_FIFO, &param) != 0)
+    perror("sched_setscheduler");
 
   on_thread_start();
 
