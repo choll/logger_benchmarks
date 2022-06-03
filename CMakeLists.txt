@@ -4,6 +4,35 @@ project(logger_benchmarks)
 set(CMAKE_CXX_FLAGS "-m64 -std=c++17 -march=native" CACHE STRING "" FORCE)
 set(BUILD_SHARED_LIBS "OFF")
 
+option(ENABLE_LTO "Enable link-time optimisation" ON)
+
+if (ENABLE_LTO)
+    # CMake's INTERPROCEDURAL_OPTIMIZATION feature isn't used as it does not
+    # use gcc-ranlib and gcc-ar (as recommended by
+    # https://gcc.gnu.org/onlinedocs/gcc/Optimize-Options.html).
+    add_compile_options(-flto)
+    add_link_options(-flto)
+    if (CMAKE_CXX_COMPILER_ID MATCHES ".*GNU")
+        find_program(GCC_AR gcc-ar)
+        if (GCC_AR)
+            set(CMAKE_AR ${GCC_AR})
+        endif()
+        find_program(GCC_RANLIB gcc-ranlib)
+        if (GCC_RANLIB)
+            set(CMAKE_RANLIB ${GCC_RANLIB})
+        endif()
+    elseif(CMAKE_CXX_COMPILER_ID MATCHES ".*Clang")
+        find_program(LLVM_AR llvm-ar)
+        if (LLVM_AR)
+            set(CMAKE_AR ${LLVM_AR})
+        endif()
+        find_program(LLVM_RANLIB llvm-ranlib)
+        if (LLVM_RANLIB)
+            set(CMAKE_RANLIB ${LLVM_RANLIB})
+        endif()
+    endif()
+endif()
+
 #-------------------------------------------------------------------------------------------------------
 # Set default build to release
 #-------------------------------------------------------------------------------------------------------

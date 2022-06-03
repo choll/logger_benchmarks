@@ -5,6 +5,7 @@
 #include <chrono>
 #include <cstdint>
 #include <functional>
+#include <iomanip>
 #include <iostream>
 #include <numeric>
 #include <random>
@@ -13,12 +14,14 @@
 #include <sched.h>
 
 // Instead of sleep
-inline void wait(std::chrono::nanoseconds min, std::chrono::nanoseconds max)
+inline void wait(
+    std::chrono::nanoseconds min,
+    std::chrono::nanoseconds max,
+    std::uint32_t current_thread_num)
 {
 #ifdef BENCH_WITHOUT_PERF
-  static std::random_device rd;
-  static std::mt19937 gen(rd());
-  static std::uniform_int_distribution<> dis(min.count(), max.count());
+  thread_local std::mt19937 gen(current_thread_num);
+  thread_local std::uniform_int_distribution<> dis(min.count(), max.count());
 
   auto const start_time = std::chrono::steady_clock::now();
   auto const end_time = start_time.time_since_epoch() + std::chrono::nanoseconds{dis(gen)};
@@ -57,27 +60,18 @@ inline void run_log_benchmark(size_t num_iterations,
                               std::function<void(uint64_t, uint64_t, double)> log_func,
                               std::function<void()> on_thread_exit,
                               size_t current_thread_num,
-                              std::vector<uint64_t>& latencies,
-                              double rdtsc_ticks_per_ns)
+                              std::vector<uint64_t>& latencies)
   #elif defined(BENCH_INT_INT_LARGESTR)
 inline void run_log_benchmark(size_t num_iterations,
                               std::function<void()> on_thread_start,
                               std::function<void(uint64_t, uint64_t, std::string const&)> log_func,
                               std::function<void()> on_thread_exit,
                               size_t current_thread_num,
-                              std::vector<uint64_t>& latencies,
-                              double rdtsc_ticks_per_ns)
+                              std::vector<uint64_t>& latencies)
   #endif
 {
   // running thread affinity
   set_thread_affinity(current_thread_num);
-
-  sched_param param{};
-
-  param.sched_priority = 99;
-
-  if (sched_setscheduler(0, SCHED_FIFO, &param) != 0)
-    perror("sched_setscheduler");
 
   on_thread_start();
 
@@ -111,11 +105,10 @@ inline void run_log_benchmark(size_t num_iterations,
     }
     auto const end = __rdtscp(&aux);
 
-    uint64_t const latency{static_cast<uint64_t>((end - start) / MESSAGES / rdtsc_ticks_per_ns)};
-    latencies.push_back(latency);
+    latencies.push_back(end - start);
 
     // send the next log after x time
-    wait(MIN_WAIT_DURATION, MAX_WAIT_DURATION);
+    wait(MIN_WAIT_DURATION, MAX_WAIT_DURATION, current_thread_num);
   }
 
   on_thread_exit();
@@ -173,7 +166,7 @@ inline void run_benchmark(char const* benchmark_name,
 #endif
 {
   // main thread affinity
-  set_thread_affinity(0);
+  set_thread_affinity(1);
 
 #ifdef BENCH_WITHOUT_PERF
   // each thread gets a vector of latencies
@@ -192,11 +185,11 @@ inline void run_benchmark(char const* benchmark_name,
 #ifdef BENCH_WITHOUT_PERF
     // Spawn num threads
     threads.emplace_back(run_log_benchmark, num_iterations, on_thread_start, log_func, on_thread_exit,
-                         thread_num + 1, std::ref(latencies[thread_num]), rdtsc_ticks());
+                         thread_num + 2, std::ref(latencies[thread_num]));
 #else
     // Spawn num threads
     threads.emplace_back(run_log_benchmark, num_iterations, on_thread_start, log_func,
-                         on_thread_exit, thread_num + 1);
+                         on_thread_exit, thread_num + 2);
 #endif
   }
 
@@ -224,19 +217,22 @@ inline void run_benchmark(char const* benchmark_name,
   if (first)
     std::cout << "[";
 
+  const double scale = MESSAGES * rdtsc_ticks();
+
   std::cout
     << "{\n"
     << "  \"thread_count\": " << thread_count << ",\n"
     << "  \"total_messages\": " << latencies_combined.size() << ",\n"
     << "  \"centiles\": ["
-        << latencies_combined[(size_t)(num_iterations * thread_count) * 0.5]
-        << ", " << latencies_combined[(size_t)(num_iterations * thread_count) * 0.75]
-        << ", " << latencies_combined[(size_t)(num_iterations * thread_count) * 0.9]
-        << ", " << latencies_combined[(size_t)(num_iterations * thread_count) * 0.95]
-        << ", " << latencies_combined[(size_t)(num_iterations * thread_count) * 0.99]
-        << ", " << latencies_combined[(size_t)(num_iterations * thread_count) * 0.999]
-        << ", " << latencies_combined[latencies_combined.size() - 1]
-        << "]\n"
+    << std::setprecision(4)
+    << latencies_combined[(size_t)(num_iterations * thread_count) * 0.5] / scale
+    << ", " << latencies_combined[(size_t)(num_iterations * thread_count) * 0.75] / scale
+    << ", " << latencies_combined[(size_t)(num_iterations * thread_count) * 0.9] / scale
+    << ", " << latencies_combined[(size_t)(num_iterations * thread_count) * 0.95] / scale
+    << ", " << latencies_combined[(size_t)(num_iterations * thread_count) * 0.99] / scale
+    << ", " << latencies_combined[(size_t)(num_iterations * thread_count) * 0.999] / scale
+    << ", " << latencies_combined[latencies_combined.size() - 1] / scale
+    << "]\n"
     << "}";
 
   if (last)

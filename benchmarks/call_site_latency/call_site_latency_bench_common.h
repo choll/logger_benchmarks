@@ -15,8 +15,8 @@
 #define BENCH_WITHOUT_PERF
 
 #define THREAD_LIST_COUNT   std::vector<int32_t> { 1, 4 }
-#define ITERATIONS          std::size_t { 20000 }
-#define MESSAGES            std::size_t { 1000 }
+#define ITERATIONS          std::size_t { 10000 }
+#define MESSAGES            std::size_t { 20 }
 
 #define MIN_WAIT_DURATION   std::chrono::microseconds { 1700 }
 #define MAX_WAIT_DURATION   std::chrono::microseconds { 4000 }
@@ -34,9 +34,9 @@ void set_pthread_affinity(pthread_t thread, int cpu)
 }
 
 /** -------- **/
-double rdtsc_ticks()
+
+double estimate_rdtsc_ticks()
 {
-  {
     // Convert rdtsc to wall time.
     // 1. Get real time and rdtsc current count
     // 2. Calculate how many rdtsc ticks can occur in one
@@ -68,7 +68,13 @@ double rdtsc_ticks()
 
     std::nth_element(rates.begin(), rates.begin() + trials / 2, rates.end());
 
-    return rates[trials / 2];
-  }
+    const double result = rates[trials / 2];
 
+    return result;
+}
+
+double rdtsc_ticks()
+{
+    static const double tsc_ticks_per_ns = estimate_rdtsc_ticks();
+    return tsc_ticks_per_ns;
 }

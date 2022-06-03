@@ -1,5 +1,6 @@
 #include "call_site_latency_bench.h"
 
+#define EXPOSE_PRIVATES
 #include "platformlab_nanolog/include/nanolog/NanoLogCpp17.h"
 
 #include <string>
@@ -8,6 +9,8 @@
 void platformlab_nanolog(std::vector<int32_t> thread_count_array, size_t num_iterations_per_thread)
 {
   NanoLog::setLogFile("platformlab_nanolog.log");
+
+  set_pthread_affinity(NanoLogInternal::RuntimeLogger::nanoLogSingleton.compressionThread.native_handle(), 1);
 
   // wait for the backend thread to start
   std::this_thread::sleep_for(std::chrono::seconds(1));

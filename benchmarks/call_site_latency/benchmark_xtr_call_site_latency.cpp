@@ -9,7 +9,7 @@ void xtr_benchmark(std::vector<int32_t> thread_count_array, size_t num_iteration
 {
   xtr::logger log("xtr.log");
 
-  set_pthread_affinity(log.consumer_thread_native_handle(), 0);
+  set_pthread_affinity(log.consumer_thread_native_handle(), 1);
 
   // wait for the backend thread to start
   std::this_thread::sleep_for(std::chrono::seconds(1));

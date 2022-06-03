@@ -16,8 +16,7 @@ void binlog_benchmark(std::vector<int32_t> thread_count_array, size_t num_iterat
   std::thread backend([&done]() {
     std::ofstream logfile("ms_binlog.blog", std::ofstream::out | std::ofstream::binary);
 
-    // pin to cpu
-    set_thread_affinity(0);
+    set_thread_affinity(1);
 
     binlog::Session::ConsumeResult consume_result;
     do

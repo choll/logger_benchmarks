@@ -4,56 +4,55 @@
 
 ### Integer Benchmark, One Thread
 
-| Library             |   50 |   75 |   90 |   95 |   99 |   99.9 |   Max | Version           |
-|---------------------|------|------|------|------|------|--------|-------|-------------------|
-| xtr                 |    8 |    8 |    8 |    8 |    8 |      9 |    16 | 2.0.0             |
-| platformlab_nanolog |    8 |   13 |   22 |   28 |   33 |     39 |    44 | 85b71b6           |
-| reckless            |   12 |   13 |   13 |   13 |   13 |     13 |  4515 | v3.0.3            |
-| quill               |   15 |   15 |   15 |   15 |   15 |     16 |    45 | v1.6.3            |
-| ms_binlog           |   24 |   24 |   25 |   25 |   27 |     32 |    41 | 2021-04-16        |
-| iyengar_nanolog     |   47 |   48 |   52 |   72 |  102 |    117 |   166 | 3ffc74a           |
-| spdlog              |  212 |  217 |  226 |  230 |  237 |    277 |   367 | v1.10.0           |
-| g3log               | 1427 | 2005 | 2044 | 2073 | 2608 |   2723 |  2966 | 1.3.4-19-gc51128f |
+| Library             |     50 |     75 |     90 |     95 |     99 |   99.9 |     Max | Version                |
+|---------------------|--------|--------|--------|--------|--------|--------|---------|------------------------|
+| xtr                 |   11   |   12   |   12.5 |   13   |   14   |   41   |    55.5 | 2.0.1                  |
+| platformlab_nanolog |   11.5 |   11.5 |   12   |   12   |   12.5 |   14.5 |    33   | 85b71b6                |
+| quill               |   12   |   13   |   13.5 |   14   |   14.5 |   16   |   530.5 | v2.0.2                 |
+| reckless            |   17   |   17   |   17.5 |   17.5 |   19.5 |   21.5 |    38   | v3.0.3                 |
+| ms_binlog           |   29.5 |   31   |   32   |   32.5 |   68   |  105.5 |   384   | 2020-04-26-82-g2de2fa0 |
+| iyengar_nanolog     |  142   |  158   |  173.5 |  192.5 |  421   |  484   | 41490   | 3ffc74a                |
+| spdlog              |  284.5 |  317   |  346   |  363.5 |  399.5 |  501.5 |   572.5 | v1.10.0                |
+| g3log               | 2543   | 2637   | 2724   | 2779   | 2879   | 3015   |  3354   | 1.3.4                  |
 
 ### Integer Benchmark, Four Threads
 
-| Library             |   50 |   75 |   90 |   95 |   99 |   99.9 |   Max | Version           |
-|---------------------|------|------|------|------|------|--------|-------|-------------------|
-| xtr                 |    8 |    8 |    8 |    8 |    8 |      9 |    75 | 2.0.0             |
-| platformlab_nanolog |    8 |    8 |   11 |   14 |   23 |     31 |    51 | 85b71b6           |
-| reckless            |   13 |   13 |   13 |  332 | 1726 |   2775 | 51201 | v3.0.3            |
-| quill               |   13 |   14 |   15 |   15 |   17 |     41 | 59487 | v1.6.3            |
-| ms_binlog           |   24 |   24 |   25 |   25 |   27 |     32 |    42 | 2021-04-16        |
-| iyengar_nanolog     |   94 |   98 |  114 |  146 |  177 |    222 |   269 | 3ffc74a           |
-| spdlog              |  251 |  352 |  481 |  550 |  708 |    885 |  1059 | v1.10.0           |
-| g3log               | 1569 | 1727 | 1872 | 1971 | 2148 |   2285 |  2431 | 1.3.4-19-gc51128f |
-
+| Library             |     50 |     75 |     90 |     95 |     99 |   99.9 |     Max | Version                |
+|---------------------|--------|--------|--------|--------|--------|--------|---------|------------------------|
+| xtr                 |   11   |   12   |   12.5 |   13.5 |   14.5 |   41.5 |    73   | 2.0.1                  |
+| platformlab_nanolog |   11.5 |   12   |   12.5 |   12.5 |   13   |   17   |    33.5 | 85b71b6                |
+| quill               |   13   |   14.5 |   15.5 |   16.5 |   18   |   21.5 |    23   | v2.0.2                 |
+| reckless            |   18   |   19.5 |   20.5 |   20.5 |   21.5 |   28   |    65   | v3.0.3                 |
+| ms_binlog           |   29.5 |   31   |   32   |   33   |   70.5 |  107.5 |   412   | 2020-04-26-82-g2de2fa0 |
+| iyengar_nanolog     |  135   |  152.5 |  172   |  184   |  227   |  507.5 | 63290   | 3ffc74a                |
+| spdlog              |  280.5 |  314.5 |  342.5 |  361.5 |  403.5 |  540.5 |   669.5 | v1.10.0                |
+| g3log               | 2530   | 2624   | 2710   | 2767   | 2878   | 3017   |  7146   | 1.3.4                  |
 
 ### String Benchmark, One Thread
 
-| Library             |   50 |   75 |   90 |   95 |   99 |   99.9 |   Max | Version           |
-|---------------------|------|------|------|------|------|--------|-------|-------------------|
-| xtr                 |   11 |   12 |   13 |   15 |   16 |     19 |    24 | 2.0.0             |
-| platformlab_nanolog |   14 |   15 |   17 |   18 |   24 |     37 |    80 | 85b71b6           |
-| quill               |   15 |   17 |   18 |   19 |   22 |     59 |   125 | v1.6.3            |
-| ms_binlog           |   27 |   27 |   27 |   27 |   28 |     29 |    49 | 2021-04-16        |
-| reckless            |   32 |   36 |   40 |   41 |   55 |     64 |  1438 | v3.0.3            |
-| iyengar_nanolog     |   59 |   67 |   77 |   79 |   98 |    161 |   225 | 3ffc74a           |
-| spdlog              |  202 |  215 |  239 |  265 |  347 |    458 |   527 | v1.10.0           |
-| g3log               | 1066 | 1090 | 1519 | 1575 | 1823 |   2284 |  2427 | 1.3.4-19-gc51128f |
+| Library             |     50 |     75 |     90 |     95 |     99 |   99.9 |     Max | Version                |
+|---------------------|--------|--------|--------|--------|--------|--------|---------|------------------------|
+| xtr                 |   12.5 |   13.5 |   14   |   14.5 |   16   |   41.5 |    51   | 2.0.1                  |
+| platformlab_nanolog |   13.5 |   14   |   14.5 |   14.5 |   15.5 |   19   |    35.5 | 85b71b6                |
+| quill               |   14.5 |   15.5 |   18   |   18.5 |   20   |   21.5 |    22.5 | v2.0.2                 |
+| ms_binlog           |   34   |   35.5 |   36.5 |   38   |   75   |  109.5 |   389.5 | 2020-04-26-82-g2de2fa0 |
+| reckless            |   44   |   47.5 |   49.5 |   50.5 |   52.5 |   79.5 |   134.5 | v3.0.3                 |
+| iyengar_nanolog     |  120   |  150   |  166.5 |  181   |  379.5 |  492.5 | 41680   | 3ffc74a                |
+| spdlog              |  255   |  299   |  344   |  373.5 |  484.5 | 1123   |  1602   | v1.10.0                |
+| g3log               | 1975   | 2214   | 2340   | 2416   | 2536   | 2693   |  2888   | 1.3.4                  |
 
 ### String Benchmark, Four Threads
 
-| Library             |   50 |   75 |   90 |   95 |   99 |   99.9 |    Max | Version           |
-|---------------------|------|------|------|------|------|--------|--------|-------------------|
-| xtr                 |   12 |   13 |   15 |   16 |   19 |     19 |   2411 | 2.0.0             |
-| platformlab_nanolog |   14 |   16 |   17 |   20 |   24 |     66 |    165 | 85b71b6           |
-| quill               |   15 |   17 |   19 |   22 |   92 |    135 | 121839 | v1.6.3            |
-| ms_binlog           |   27 |   28 |   29 |   31 |   36 |     43 |  36385 | 2021-04-16        |
-| reckless            |   35 |   40 |   48 |   59 |  400 |  15678 |  53942 | v3.0.3            |
-| iyengar_nanolog     |  104 |  129 |  160 |  181 |  227 |    291 |    428 | 3ffc74a           |
-| spdlog              |  261 |  408 |  550 |  657 |  897 |   1298 |   1747 | v1.10.0           |
-| g3log               | 1565 | 1701 | 1815 | 1883 | 2024 |   2246 |   2597 | 1.3.4-19-gc51128f |
+| Library             |     50 |     75 |     90 |     95 |     99 |   99.9 |    Max | Version                |
+|---------------------|--------|--------|--------|--------|--------|--------|--------|------------------------|
+| xtr                 |   13   |   13.5 |   14.5 |   15   |   16.5 |   46   |   66   | 2.0.1                  |
+| platformlab_nanolog |   13.5 |   14   |   14.5 |   15   |   16.5 |   22   |   39   | 85b71b6                |
+| quill               |   14.5 |   15.5 |   17   |   18   |   20   |   21.5 |   23.5 | v2.0.2                 |
+| ms_binlog           |   34.5 |   36   |   37.5 |   38.5 |   75.5 |  115.5 |  408.5 | 2020-04-26-82-g2de2fa0 |
+| reckless            |   44   |   48   |   50   |   51   |   52.5 |   68.5 |  216.5 | v3.0.3                 |
+| iyengar_nanolog     |   96.5 |  132.5 |  161.5 |  174.5 |  229.5 |  487   | 8354   | 3ffc74a                |
+| spdlog              |  256   |  301.5 |  349.5 |  379   |  495.5 | 1177   | 2071   | v1.10.0                |
+| g3log               | 1911   | 2245   | 2380   | 2451   | 2582   | 2738   | 6578   | 1.3.4                  |
 
 Note that these timings are not really percentiles, they are instead timings collected into
 buckets, the average of the bucket is recorded, then percentiles of the bucket averages are
@@ -64,40 +63,42 @@ calculated.
 * Stock AMD 5950X
 * Samsung 970 EVO Plus 1TB SSD
 * GCC 11.2.0
-* Linux 5.16.0-6-amd64, Debian "bookworm"
+* Linux 5.17.0-1-amd64, Debian "bookworm"
 * SMT disabled
-* cpupower governor set to 'performance'
+* CPU governor set to 'performance'
 * Kernel command line parameters:
     - `mitigations=off`
     - `transparent_hugepage=never`
-    - `isolcpus=0,1,2,3,4`
-    - `nohz_full=0,1,2,3,4`
-    - `rcu_nocbs=0,1,2,3,4`
+    - `isolcpus=1,2,3,4,5`
+    - `nohz_full=1,2,3,4,5`
+    - `rcu_nocbs=1,2,3,4,5`
     - `rcu_nocb_poll`
     - `processor.max_cstate=1`
     - `idle=poll`
     - `skew_tick=1`
 * Run `irqbalance` (`IRQBALANCE_BANNED_CPULIST` is not set as irqbalance will automatically add isolated and nohz cpus to the banned list).
-* Run ``for i in `pgrep rcu[^c]`; do taskset -pc 5-15 $i; done`` to move RCU threads away from isolated cores.
-* Run `echo ffffffe0 > /sys/bus/workqueue/devices/writeback/cpumask` to prevent bdi-flush threads from running on isolated cores.
+* Run `echo ffffffe1 > /sys/bus/workqueue/devices/writeback/cpumask` to prevent bdi-flush threads from running on isolated cores.
+* RCU thread affinities will be `0,6-15` on boot.
+* `amd_pstate` scaling driver (this made no difference to the results, it is only listed here for completeness).
 
 ## Changes From Upstream
 
 * The Reckless buffer size was increased to 512KB (default is 64KB).
-* Affinity settings were applied to the Reckless worker thread.
+* Affinity settings were applied to the Reckless background thread.
 * The Iyengar roll size was increased to 10GB.
 * PlatformLab's Config.h was modified; `O_DSYNC` was removed from from
   `FILE_PARAMS`, `POLL_INTERVAL_NO_WORK_US` was set to `0` and
-  `POLL_INTERVAL_DURING_IO_US` was set to `0`.
-* The number of messages in the test loop was increased to 1000 to ensure
-  stable readings for all loggers---PlatformLab, Reckless and XTR had timings
-  that were sometimes fast but mostly unexpectedly slow with only 20 messages.
-  Possibly 20 messages is too low for frequency-scaling to occur.
-
-# Notes
-
-* PlatformLab runs either at 7-8ns or ~30ns, possibly the number of messages
-  needs to be increased further.
+  `POLL_INTERVAL_DURING_IO_US` was set to `0` (see `platformlab.patch`).
+* PlatformLab's background thread has affinity set. This made a big improvement in
+  performance---without this it would often run at around 30ns.
+* Use cores 1-5 instead of 0-5 as core 0 is by default used as a 'housekeeping'
+  core which cannot have `nohz_full` enabled.
+* Turned on link time optimization.
+* Other minor changes:
+    - Changed `static` variables holding RNG state in the `wait()` function to
+      `thread_local` as they are mutated by multiple threads.
+    - TSC frequency is estimated once and cached.
+    - Added fractions to timings.
 
 ## Building
 
