@@ -83,6 +83,7 @@ calculated.
 
 ## Changes From Upstream
 
+* Reduced iterations from 100,000 to 10,000 as 10,000 was enough to get consistent results.
 * The Reckless buffer size was increased to 512KB (default is 64KB).
 * Affinity settings were applied to the Reckless background thread.
 * The Iyengar roll size was increased to 10GB.
