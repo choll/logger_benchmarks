@@ -77,7 +77,7 @@ calculated.
     - `idle=poll`
     - `skew_tick=1`
 * Run `irqbalance` (`IRQBALANCE_BANNED_CPULIST` is not set as irqbalance will automatically add isolated and nohz cpus to the banned list).
-* Run `echo ffffffe1 > /sys/bus/workqueue/devices/writeback/cpumask` to prevent bdi-flush threads from running on isolated cores.
+* Run `echo ffffffe1 > /sys/bus/workqueue/devices/writeback/cpumask` to prevent writeback tasks from running on isolated cores.
 * RCU thread affinities will be `0,6-15` on boot.
 * `amd_pstate` scaling driver (this made no difference to the results, it is only listed here for completeness).
 
